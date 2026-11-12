@@ -114,7 +114,7 @@ def fish_stats(state: State) -> Page:
     else:
         longest_fish = state.history[0]
         heaviest_fish = state.history[0]
-        species_counts = {}
+        species_counts: dict[str, int] = {}
 
         for fish in state.history:
             if fish.size > longest_fish.size:
@@ -128,7 +128,7 @@ def fish_stats(state: State) -> Page:
             else:
                 species_counts[fish.species] = 1
 
-        most_caught = max(species_counts, key=species_counts.get)
+        most_caught = max(species_counts, key=lambda species: species_counts[species])
 
         content.append(Text(
             "Total Fish Caught: " + str(len(state.history))
